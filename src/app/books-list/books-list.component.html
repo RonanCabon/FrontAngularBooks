@@ -1,0 +1,41 @@
+<section *ngIf="!errorMessage; else error">
+
+  <div *ngIf="snackBarMessage">
+    {{snackBarMessage}}
+  </div>
+
+  <div *ngIf="booksArray as books; else loading">
+
+    <div class="books-flexbox">
+    <mat-card class="example-card" *ngFor="let book of books">
+      <mat-card-header>
+        <mat-card-title>{{book.name}}</mat-card-title>
+        <mat-card-subtitle>{{book.category}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://fakeimg.pl/300/?text=abc" alt="{{book.title}}">
+      <mat-card-content>
+        <p>
+          {{book.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="books-function-bar-actions">
+        <button mat-flat-button color="primary" [routerLink]="['books-list/book-read', book._id]">Editer</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+ 
+    <mat-card-actions class="books-function-bar-actions">
+      <button mat-flat-button color="primary" (click)="createBook()">Création</button>
+    </mat-card-actions>
+    
+  </div>
+
+  <ng-template #loading>
+    Loading Books ...
+  </ng-template>
+
+</section>
+
+<ng-template #error>
+  {{errorMessage}}
+</ng-template>

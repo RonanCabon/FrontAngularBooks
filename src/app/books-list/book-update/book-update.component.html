@@ -1,0 +1,85 @@
+<section *ngIf="!errorMessage; else error">
+  
+    <div *ngIf="book; else loading">
+
+        <div class="books-flexbox">   
+
+            <mat-card>
+                
+            <mat-card-header>
+                <mat-card-title>Formulaire mise à jour d'un livre</mat-card-title>
+            </mat-card-header>
+
+            <form novalidate (ngSubmit)="onFormSubmit(updateBookForm.form)" #updateBookForm="ngForm" novalidate>
+
+                <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Nom du livre</mat-label>
+                    <input  
+                    matInput  
+                    placeholder="Nom du livre" 
+                    [(ngModel)]="book.name" 
+                    name="name"
+                    #nameField="ngModel">
+                </mat-form-field>  
+                <mat-form-field>
+                    <mat-label>Auteur du livre</mat-label>
+                    <input  
+                    matInput  
+                    placeholder="Auteur du livre" 
+                    [(ngModel)]="book.author" 
+                    name="author"
+                    #authorField="ngModel">
+                </mat-form-field>  
+                <mat-form-field>
+                    <mat-label>Categorie du livre</mat-label>
+                    <input  
+                    matInput  
+                    placeholder="Catégorie du livre" 
+                    [(ngModel)]="book.category" 
+                    name="category"
+                    #categoryField="ngModel">
+                </mat-form-field>  
+                <mat-form-field>
+                    <mat-label>Image du livre</mat-label>
+                    <input  
+                    matInput  
+                    placeholder="Image du livre" 
+                    [(ngModel)]="book.image" 
+                    name="image"
+                    #imageField="ngModel">
+                </mat-form-field>  
+                <mat-form-field>
+                    <mat-label>Description du livre</mat-label>
+                    <input  
+                    matInput  
+                    placeholder="Description du livre" 
+                    [(ngModel)]="book.description" 
+                    name="description"
+                    #descriptionField="ngModel">
+                </mat-form-field>  
+                </mat-card-content>
+
+                <mat-card-actions class="books-function-bar-actions">
+                    <button mat-flat-button color="primary">Enregistrer</button>
+                    <button mat-flat-button color="primary" [routerLink]="['/']">Retour à la liste</button>
+                </mat-card-actions>
+
+            </form>
+            </mat-card>
+        </div>
+
+    </div>
+
+</section>
+
+<ng-template #loading>
+    Loading Book ...
+  </ng-template>
+  
+<ng-template #error>
+    {{errorMessage}}
+</ng-template>
+    
+<!--{{updateBookForm.value | json}} -->
+

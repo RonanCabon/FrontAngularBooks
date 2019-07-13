@@ -1,0 +1,19 @@
+.books-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding:20px;
+}
+
+.example-card {
+  max-width: 400px;
+  border-radius:0px;
+  padding-bottom:50px;
+}
+
+.mat-card-actions.books-function-bar-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #424242;
+}

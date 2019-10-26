@@ -40,16 +40,19 @@
                     name="category"
                     #categoryField="ngModel">
                 </mat-form-field>  
-                <mat-form-field>
-                    <mat-label>Image du livre</mat-label>
-                    <input  
-                    matInput  
-                    placeholder="Image du livre" 
-                    [(ngModel)]="book.image" 
-                    name="image"
-                    #imageField="ngModel">
-                </mat-form-field>  
-                <mat-form-field>
+                <label>Image du livre</label>
+                <input  
+                placeholder="Image du livre" 
+                [(ngModel)]="book.image" 
+                name="bookImage"
+                #imageField="ngModel"
+                type="file"
+                id="bookImage">
+                <button type="button" 
+                  mat-flat-button 
+                  color="primary" 
+                  (click)="uploadImageFile()">Upload du fichier image</button>
+                      <mat-form-field>
                     <mat-label>Description du livre</mat-label>
                     <input  
                     matInput  

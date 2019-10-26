@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { BooksModel } from 'src/app/models/books-model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-book-read',
@@ -15,6 +16,7 @@ export class BookReadComponent implements OnInit {
 
   private bookData$: Observable<BooksModel>;
   private book: BooksModel;
+  private imagePath =  environment.imagePath;
   public httpErrorResponse: HttpErrorResponse;
   public errorMessage: string;
   private name: string;

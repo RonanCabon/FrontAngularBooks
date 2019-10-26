@@ -19,6 +19,8 @@ export class BookCreateComponent implements OnInit {
   public errorMessage: string;
   private uploadImageFile$: Observable<any>;
 
+  private lastImageUploaded;
+
   constructor(
     private booksListService: BooksListService,
     private router: Router,
@@ -46,7 +48,7 @@ export class BookCreateComponent implements OnInit {
     this.book.description = form.description;
     */
 
-    console.log('this.book: ', this.book);
+    this.book.image = this.lastImageUploaded.data.uploadedImage;
 
     this.bookData$ = this.booksListService.createBook(this.book)
       .pipe(catchError(err => {
@@ -56,9 +58,11 @@ export class BookCreateComponent implements OnInit {
       })
       );
 
-    this.bookData$.subscribe(data => this.book = data);
+    this.bookData$.subscribe(data => { this.book = data; });
 
-    this.router.navigate(['/'], {queryParams: {message: `book ${this.book.name} created !`}});
+    console.log('this.book: ', this.book);
+
+    this.router.navigate(['/'], { queryParams: { message: `book ${this.book.name} ${this.book.image} created !` } });
 
   }
 
@@ -73,14 +77,16 @@ export class BookCreateComponent implements OnInit {
       const formData = new FormData();
       formData.append('bookImage', inputEl.files.item(0));
       this.uploadImageFile$ = this.booksListService.uploadImageFile(formData)
-      .pipe(catchError(err => {
-        this.httpErrorResponse = err;
-        this.errorMessage = this.httpErrorResponse.message;
-        return of(err);
-      })
-      );
+        .pipe(catchError(err => {
+          this.httpErrorResponse = err;
+          this.errorMessage = this.httpErrorResponse.message;
+          return of(err);
+        })
+        );
       this.uploadImageFile$.subscribe(
-        data => console.log('Uploading image'),
+        data => {
+          this.lastImageUploaded = data;
+        },
         error => console.log('Error from uploadImageFile Observable'));
     }
 

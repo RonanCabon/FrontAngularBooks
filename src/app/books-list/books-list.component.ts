@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
@@ -15,6 +17,7 @@ export class BooksListComponent implements OnInit {
 
   private booksData$: Observable<BooksModel[]>;
   private booksArray: BooksModel[];
+  private imagePath = environment.imagePath;
   public httpErrorResponse: HttpErrorResponse;
   public errorMessage: string;
   public snackBarMessage: string;
@@ -25,6 +28,8 @@ export class BooksListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    console.log('CALLING NGONINIT');
+
     this.booksData$ = this.booksListService.getBooks()
     .pipe(catchError(err => {
       this.httpErrorResponse = err;
